@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -8,22 +9,36 @@ using Newtonsoft.Json.Linq;
 
 namespace WXLogin
 {
+    /// <summary>
+    /// 消息格式处理
+    /// 依赖BaseService,LoginService
+    /// 如果要分离出去，请解耦BaseService,LoginService
+    /// </summary>
     public class MsgHandle : IWXMsgHandle
     {
-        private readonly WXService _wxService;
+        protected readonly WXService _wxService;
 
         public MsgHandle(WXService ws)
         {
             _wxService = ws;
         }
 
-        public string Handle(JToken msgInfo)
+        /// <summary>
+        /// 返回的格式如下：
+        /// string:文本文件
+        /// byte[]:图片
+        /// </summary>
+        /// <returns>The handle.</returns>
+        /// <param name="msgInfo">Message info.</param>
+        public virtual object Handle(JToken msgInfo)
         {
             var msg = msgInfo["Content"].ToString();
             var msgType = msgInfo["MsgType"].ToString();
             var appMsgType = msgInfo["AppMsgType"].ToString();
             var subMsgType = msgInfo["SubMsgType"].ToString();
             var fromUserName = msgInfo["FromUserName"].ToString();
+            var msgId = msgInfo["MsgId"].ToString();
+            var hasProductId = msgInfo["HasProductId"].Value<int>();
 
             if (fromUserName.StartsWith("@@"))
             {
@@ -78,13 +93,21 @@ namespace WXLogin
                 }
             }
 
+            var object_47 = new object();
+            if (msgType == "47")
+            {
+                // 等于1时候，为微信商店表情
+                if (hasProductId == 1) object_47 = "[收到了一个表情，请在手机上查看]";
+                else object_47 = this.OnHandlePic(msgType, msgId, LoginService.SKey);
+            }
+
             // other msg
             switch (msgType)
             {
                 case "3":
-                    return "[图片消息]";
+                    return this.OnHandlePic(msgType, msgId, LoginService.SKey);
                 case "47":
-                    return "[对方收藏图片]";
+                    return object_47;
                 case "34":
                     return "[语音消息]";
                 case "43":
@@ -102,6 +125,35 @@ namespace WXLogin
             }
 
             return msg;
+        }
+
+        // 处理图片包括用户自己收藏的图片
+        // 处理type为3和47的情况
+        // byte[]为小图片数据，string为大图地址
+        // 为null的时候表示无更大的图
+        public virtual Tuple<byte[], string> OnHandlePic(string msgType, string MsgID, string skey)
+        {
+            var type = msgType == "3" ? "slave" : "big";
+            var url = $"https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetmsgimg?&MsgID={MsgID}&skey={skey}";
+            var bytes = BaseService.SendGetRequest($"{url}&type={type}");
+
+            return new Tuple<byte[], string>(bytes, msgType == "3" ? url : null);
+        }
+
+        // 处理音频
+        // 暂不开启
+        public virtual byte[] OnHandleAudio(string msgid, string skey)
+        {
+            var url = $"https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetvoice?msgid={msgid}&skey={skey}";
+            return BaseService.SendGetRequest(url);
+        }
+
+        // 处理视频
+        // 暂不开启
+        public virtual byte[] OnHandleVideo(string msgid, string skey)
+        {
+            var url = $"https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetvideo?msgid={msgid}&skey={skey}";
+            return BaseService.SendGetRequest(url);
         }
     }
 }

@@ -61,12 +61,12 @@ namespace WXLogin
             }
             catch (TimeoutException t)
             {
-                Console.WriteLine("超时！" + t.Message);
+                System.Diagnostics.Debug.WriteLine("超时！" + t.Message);
                 return null;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                System.Diagnostics.Debug.WriteLine(e.Message);
                 return null;
             }
         }
@@ -121,12 +121,12 @@ namespace WXLogin
             }
             catch (TimeoutException t)
             {
-                Console.WriteLine("超时！" + t.Message);
+                System.Diagnostics.Debug.WriteLine("超时！" + t.Message);
                 return null;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                System.Diagnostics.Debug.WriteLine(e.Message);
                 return null;
             }
         }

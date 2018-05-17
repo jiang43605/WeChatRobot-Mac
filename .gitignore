@@ -31,7 +31,6 @@ Thumbs.db
 
 # Mac bundle stuff
 *.dmg
-*.app
 
 # resharper
 *_Resharper.*
@@ -39,3 +38,10 @@ Thumbs.db
 
 # dotCover
 *.dotCover
+
+
+
+# custom
+.vscode/
+!/Bin/
+README.bak

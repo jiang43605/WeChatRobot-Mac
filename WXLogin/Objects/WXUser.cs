@@ -20,6 +20,12 @@ namespace WXLogin
         public string DisplayName { set; get; }
         //用户id
         private string _userName;
+
+        // 用来判断是否讨论组是否有通知权限
+        private int CHATROOM_NOTIFY_CLOSE = 0;
+
+        // 用来判断用户是否有通知权限
+        private int CONTACTFLAG_NOTIFYCLOSECONTACT = 512;
         public string UserName
         {
             get
@@ -149,6 +155,12 @@ namespace WXLogin
             }
         }
 
+        // 跟通知提醒有关
+        public int ContactFlag { set; get; }
+
+        // 跟通知提醒有关
+        public int Statues { set; get; }
+
         //头像
         private bool _loading_icon = false;
         private byte[] _icon;
@@ -215,6 +227,14 @@ namespace WXLogin
             if (userName.StartsWith("@@")) return UserType.ChatRoom;
             if (Convert.ToBoolean(int.Parse(verifyflag) & 8)) return UserType.BrandContact;
             return UserType.Friend;
+        }
+
+        // 是否通知
+        public bool IsMuted()
+        {
+            return this.UserType == UserType.ChatRoom
+                       ? this.Statues == CHATROOM_NOTIFY_CLOSE
+                       : Convert.ToBoolean(this.ContactFlag & CONTACTFLAG_NOTIFYCLOSECONTACT);
         }
 
     }

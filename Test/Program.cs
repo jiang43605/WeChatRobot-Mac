@@ -6,10 +6,12 @@ namespace Test
 {
     class Program
     {
+
+        private static string preMsg;
         static void Main(string[] args)
         {
 
-           var ls = new LoginService();
+            var ls = new LoginService();
 
             var codeStream = ls.GetQRCode();
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "WX二维码.png");
@@ -45,12 +47,36 @@ namespace Test
             {
                 foreach (var msg in msgs)
                 {
-                    //Console.WriteLine(msg);
-                    Console.WriteLine($"来自：{msg.FromNickName}; type：{msg.Type}");
-                    Console.WriteLine($"{msg.Msg}");
-                    // do you logic
+                    MsgHandle(msg);
                 }
             });
+        }
+
+
+        static void MsgHandle(WXMsg msg)
+        {
+            var time = msg.Time.ToString("HH:mm:ss");
+            var mt = System.Text.RegularExpressions.Regex.Match(msg.FromNickName, @"^\[(.*)\](.*)$");
+            var eqNickName = msg.FromNickName;
+            if (mt.Success) eqNickName = mt.Groups[1].Value;
+
+            if (!eqNickName.Equals(preMsg) && !eqNickName.Equals("Chengf"))
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(eqNickName + "-" + time);
+                Console.ResetColor();
+            }
+
+            var name = eqNickName.Equals("Chengf") ? "我" : eqNickName;
+            if (mt.Success)
+            {
+                name = eqNickName.Equals("Chengf") ? "我" : mt.Groups[2].Value;
+            }
+
+            Console.WriteLine($"[{name}][{time}]{msg.Msg}");
+
+            if (!eqNickName.Equals("Chengf")) preMsg = eqNickName;
         }
     }
 }

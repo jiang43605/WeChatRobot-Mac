@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Z8s-3p-0tZ">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Application-->
+        <scene sceneID="JPo-4y-FX3">
+            <objects>
+                <application id="hnw-xV-0zn" sceneMemberID="viewController">
+                    <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
+                        <items>
+                            <menuItem title="微信消息" id="1Xt-HY-uBw">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="微信消息" systemMenu="apple" id="uQy-DD-JDr">
+                                    <items>
+                                        <menuItem title="About 微信消息" id="5kV-Vb-QxS">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
+                                        <menuItem title="Hide 微信消息" keyEquivalent="h" id="Olw-nP-bQN">
+                                            <connections>
+                                                <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Hide Others" keyEquivalent="h" id="Vdr-fp-XzO">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="hideOtherApplications:" target="Ady-hI-5gd" id="VT4-aY-XCT"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Show All" id="Kd2-mp-pUS">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="unhideAllApplications:" target="Ady-hI-5gd" id="Dhg-Le-xox"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
+                                        <menuItem title="Quit 微信消息" keyEquivalent="q" id="4sb-4s-VLi">
+                                            <connections>
+                                                <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
+                    </connections>
+                </application>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
+                <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="0.0"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="R2V-B0-nI4">
+            <objects>
+                <windowController storyboardIdentifier="MainWindow" id="B8D-0N-5wS" sceneMemberID="viewController">
+                    <window key="window" title="微信聊天助手" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="800" height="800"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="800" height="800"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="9Ez-Pa-Zb7"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                    </connections>
+                </windowController>
+                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="250"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="hIz-AP-VOD">
+            <objects>
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="800"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aJN-W5-QDA">
+                                <rect key="frame" x="20" y="31" width="753" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="l1B-3N-bw3">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="InputChange:" target="XfG-lQ-9wD" id="q6F-Fk-IGV"/>
+                                </connections>
+                            </textField>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="bte-lE-UXO">
+                                <rect key="frame" x="23" y="759" width="750" height="5"/>
+                            </box>
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICZ-xw-q6s">
+                                <rect key="frame" x="20" y="86" width="753" height="669"/>
+                                <clipView key="contentView" id="NeF-Fc-uWX">
+                                    <rect key="frame" x="0.0" y="0.0" width="753" height="669"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="tNP-it-F6p">
+                                            <rect key="frame" x="0.0" y="0.0" width="753" height="669"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <size key="minSize" width="753" height="669"/>
+                                            <size key="maxSize" width="753" height="10000000"/>
+                                            <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="h0l-Go-Ei5">
+                                    <rect key="frame" x="1" y="690" width="751" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="h9M-Bx-Zrp">
+                                    <rect key="frame" x="737" y="0.0" width="16" height="650"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="28N-uT-Ci7">
+                                <rect key="frame" x="20" y="763" width="753" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="登录成功" drawsBackground="YES" id="IuN-FV-UqN">
+                                    <font key="font" metaFont="titleBar"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ng-g2-kKL">
+                                <rect key="frame" x="18" y="57" width="694" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="eCf-Ib-2h5">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ujg-wb-DeQ">
+                                <rect key="frame" x="20" y="75" width="753" height="5"/>
+                            </box>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="28N-uT-Ci7" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="DpF-wz-KCN"/>
+                            <constraint firstAttribute="trailing" secondItem="28N-uT-Ci7" secondAttribute="trailing" constant="27" id="EgS-9F-ZKP"/>
+                            <constraint firstAttribute="bottom" secondItem="aJN-W5-QDA" secondAttribute="bottom" constant="31" id="JeX-zb-Ccv"/>
+                            <constraint firstItem="28N-uT-Ci7" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="MIa-9d-7aO"/>
+                            <constraint firstItem="4Ng-g2-kKL" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="Mtb-Oy-qru"/>
+                            <constraint firstItem="aJN-W5-QDA" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="NpJ-AK-Yls"/>
+                            <constraint firstAttribute="trailing" secondItem="bte-lE-UXO" secondAttribute="trailing" constant="27" id="PV1-9s-O5B"/>
+                            <constraint firstItem="aJN-W5-QDA" firstAttribute="top" secondItem="4Ng-g2-kKL" secondAttribute="bottom" constant="4" id="RKx-Or-e9o"/>
+                            <constraint firstAttribute="trailing" secondItem="ICZ-xw-q6s" secondAttribute="trailing" constant="27" id="RTD-Af-lCh"/>
+                            <constraint firstItem="bte-lE-UXO" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="23" id="cOS-Lg-gNY"/>
+                            <constraint firstAttribute="trailing" secondItem="ujg-wb-DeQ" secondAttribute="trailing" constant="27" id="cu5-Mr-Fkr"/>
+                            <constraint firstItem="bte-lE-UXO" firstAttribute="top" secondItem="28N-uT-Ci7" secondAttribute="bottom" constant="1" id="eoY-4z-VEW"/>
+                            <constraint firstItem="ICZ-xw-q6s" firstAttribute="top" secondItem="28N-uT-Ci7" secondAttribute="bottom" constant="8" id="gbv-Dy-xxX"/>
+                            <constraint firstItem="ujg-wb-DeQ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="hja-ul-lio"/>
+                            <constraint firstAttribute="trailing" secondItem="aJN-W5-QDA" secondAttribute="trailing" constant="27" id="kkp-9w-QsA"/>
+                            <constraint firstAttribute="trailing" secondItem="4Ng-g2-kKL" secondAttribute="trailing" constant="90" id="lko-DH-eie"/>
+                            <constraint firstItem="ICZ-xw-q6s" firstAttribute="top" secondItem="bte-lE-UXO" secondAttribute="bottom" constant="6" id="qAn-ld-hOX"/>
+                            <constraint firstItem="ICZ-xw-q6s" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="qZy-1a-XKM"/>
+                            <constraint firstItem="4Ng-g2-kKL" firstAttribute="top" secondItem="ujg-wb-DeQ" secondAttribute="bottom" constant="3" id="wQp-Mx-vsM"/>
+                            <constraint firstItem="ujg-wb-DeQ" firstAttribute="top" secondItem="ICZ-xw-q6s" secondAttribute="bottom" constant="8" id="zFB-1d-DuK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="LabelInputDisplay" destination="4Ng-g2-kKL" id="vpc-Uy-mO0"/>
+                        <outlet property="LoginInfo" destination="28N-uT-Ci7" id="E2P-tj-pKD"/>
+                        <outlet property="TextPrint" destination="tNP-it-F6p" id="Rm5-4r-xc8"/>
+                    </connections>
+                </viewController>
+                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="1251"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="Hsu-pa-xlm">
+            <objects>
+                <windowController storyboardIdentifier="LoginCodeWindow" id="Z8s-3p-0tZ" sceneMemberID="viewController">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="CDa-Oq-Gyj">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <rect key="contentRect" x="196" y="249" width="256" height="256"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+                        <connections>
+                            <outlet property="delegate" destination="Z8s-3p-0tZ" id="Rc9-mD-qTi"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="rip-MU-9ku" kind="relationship" relationship="window.shadowedContentViewController" id="qtO-ep-l0d"/>
+                    </connections>
+                </windowController>
+                <customObject id="AHE-fn-BYa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-60" y="1979"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="T4b-lW-xq5">
+            <objects>
+                <viewController id="rip-MU-9ku" customClass="LoginViewController" sceneMemberID="viewController">
+                    <view key="view" id="dOY-j0-wOA">
+                        <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E2m-RQ-Bmu">
+                                <rect key="frame" x="47" y="119" width="162" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="正在加载二维码，请稍后..." id="68U-L6-lXy">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yCM-Bp-9JN">
+                                <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ojh-xr-kyB"/>
+                            </imageView>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="ImageLoginCode" destination="yCM-Bp-9JN" id="ApH-a6-3pD"/>
+                        <outlet property="LabelLoginInfo" destination="E2m-RQ-Bmu" id="h7N-gl-fSq"/>
+                    </connections>
+                </viewController>
+                <customObject id="Ia8-20-HaK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="504" y="1979"/>
+        </scene>
+    </scenes>
+</document>
